@@ -16,7 +16,7 @@ public class DiceTotalDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(theDiceRoller.isRolling == true) {
+        if(theDiceRoller.doneRolling == false) {
             GetComponent<Text>().text = "=?";
         }
         else {      
