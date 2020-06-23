@@ -53,8 +53,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scenes\DiceRoller.cs" />
-     <Compile Include="Assets\Scenes\DiceTotalDisplay.cs" />
+     <Compile Include="Assets\Scenes\Scripts\DiceRoller.cs" />
+     <Compile Include="Assets\Scenes\Scripts\DiceTotalDisplay.cs" />
+     <Compile Include="Assets\Scenes\Scripts\PlayerStone.cs" />
+     <Compile Include="Assets\Scenes\Scripts\Tile.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/tribh/MyFirstGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
