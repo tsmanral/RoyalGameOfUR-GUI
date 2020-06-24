@@ -10,6 +10,8 @@ public class PlayerStone : MonoBehaviour
         theDiceRoller = GameObject.FindObjectOfType<DiceRoller>();
     }
 
+    public Tile StartingTile;
+
     DiceRoller theDiceRoller;
     
     // Update is called once per frame
@@ -28,6 +30,8 @@ public class PlayerStone : MonoBehaviour
             // Don't move the stone yet
             return;
         }
+
+        int spacesToMove = theDiceRoller.DiceTotal;
         
     }
     

@@ -10,6 +10,8 @@ public class Tile : MonoBehaviour
         
     }
 
+    public Tile[] NextTiles;
+    
     // Update is called once per frame
     void Update()
     {
