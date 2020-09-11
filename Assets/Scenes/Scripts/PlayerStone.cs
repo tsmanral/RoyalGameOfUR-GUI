@@ -7,7 +7,7 @@ public class PlayerStone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        theDiceRoller = GameObject.FindObjectOfType<DiceRoller>();
+        theStateManager = GameObject.FindObjectOfType<StateManager>();
 
         targetPosition = this.transform.position;
     }
@@ -17,10 +17,12 @@ public class PlayerStone : MonoBehaviour
 
     bool scoreMe = false;
 
-    DiceRoller theDiceRoller;
+    StateManager theStateManager;
 
     Tile[] moveQueue;
     int moveQueueIndex;
+
+    bool isAnimating = false;
 
     Vector3 targetPosition;
     Vector3 velocity = Vector3.zero;
@@ -32,6 +34,13 @@ public class PlayerStone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if(isAnimating == false)
+        {
+            //Nothing for us to do.
+            return;
+        }
+
         if(Vector3.Distance(new Vector3(this.transform.position.x, targetPosition.y, this.transform.position.z), targetPosition) < smoothDistance)
         {
             // We've reached the target.
@@ -85,6 +94,13 @@ public class PlayerStone : MonoBehaviour
                     moveQueueIndex++;
                 }
             }
+            else
+            {
+                Debug.Log("Done animating");
+
+                this.isAnimating = false;
+                theStateManager.IsDoneAnimating = true;
+            }
     }
 
     void SetNewTargetPosition(Vector3 pos)
@@ -95,16 +111,21 @@ public class PlayerStone : MonoBehaviour
 
     void OnMouseUp()
     {
-        Debug.Log("Click!");
 
         // Have we rolled the Dice
-        if(!theDiceRoller.IsDoneRolling)
+        if(!theStateManager.IsDoneRolling)
         {
             // Don't move the stone yet
             return;
         }
 
-        int spacesToMove = theDiceRoller.DiceTotal;
+        if(theStateManager. IsDoneClicking == true)
+        {
+            // We've already done the move.
+            return;
+        }
+
+        int spacesToMove = theStateManager.DiceTotal;
 
         if(spacesToMove == 0)
         {
@@ -148,12 +169,12 @@ public class PlayerStone : MonoBehaviour
             moveQueue[i] = finalTile;
         }
 
-        
-        // Teleport tile to the final tile.
-        // TODO: Animate
+        // TODO: Check to see if the destination is legal.
 
         moveQueueIndex = 0;
         currentTile = finalTile;
+        theStateManager.IsDoneClicking = true;
+        this.isAnimating = true;
     }
     
 }

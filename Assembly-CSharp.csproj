@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scenes\Scripts\DiceRoller.cs" />
      <Compile Include="Assets\Scenes\Scripts\DiceTotalDisplay.cs" />
      <Compile Include="Assets\Scenes\Scripts\PlayerStone.cs" />
+     <Compile Include="Assets\Scenes\Scripts\StateManager.cs" />
      <Compile Include="Assets\Scenes\Scripts\Tile.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/tribh/RoyalGameOfUR-GUI/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

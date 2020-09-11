@@ -9,7 +9,15 @@ public class DiceRoller : MonoBehaviour
     void Start()
     {
         DiceValues = new int[4];
+        theStateManager = GameObject.FindObjectOfType<StateManager>();
     }
+
+    StateManager theStateManager;
+
+    public int[] DiceValues;
+
+    public Sprite[] DiceImageZero;
+    public Sprite[] DiceImageOne;
 
     // Update is called once per frame
     void Update()
@@ -17,23 +25,22 @@ public class DiceRoller : MonoBehaviour
         
     }
 
-    public int[] DiceValues;
-    public int DiceTotal;
-    public Sprite[] DiceImageZero;
-    public Sprite[] DiceImageOne;
-
-    public bool IsDoneRolling = false;
-
+    
     public void RollTheDice() {
         
+        if(theStateManager.IsDoneRolling == true)
+        {
+            //We've already rolled this turn.
+            return;
+        }
         // Use Randon Number Generation to get the number of rolls in dice
 
-        DiceTotal = 0;
+        theStateManager.DiceTotal = 0;
 
         for (int i = 0; i < DiceValues.Length; i++)
         {
             DiceValues[i] = Random.Range(0, 2);
-            DiceTotal += DiceValues[i];
+            theStateManager.DiceTotal += DiceValues[i];
 
             // Update images of dice w.r.t random number
 
@@ -44,7 +51,7 @@ public class DiceRoller : MonoBehaviour
                 this.transform.GetChild(i).GetComponent<Image>().sprite = DiceImageOne[Random.Range(0, DiceImageOne.Length)];
             }
 
-            IsDoneRolling = true;
+            theStateManager.IsDoneRolling = true;
         }
 
         // Debug.Log("Rolled:" + DiceTotal);
